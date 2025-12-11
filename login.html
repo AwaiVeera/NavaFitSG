@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="description" content="NavaFit authentication portal – Google, Apple and secure email login for Seer OS.">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; video-src 'self' blob:; connect-src 'self' https://www.gstatic.com https://www.googleapis.com; frame-src 'none'; object-src 'none'; base-uri 'self';">
+    <title>NavaFit Access Portal</title>
+    <link rel="stylesheet" href="styles/global-theme.css">
+    <link rel="stylesheet" href="styles/navigation-warrior.css">
+    <link rel="stylesheet" href="styles/animations-standard.css">
+</head>
+
+<body class="bg-bg-dark text-gray-200 font-hind" data-page="login">
+    <nav class="warrior-nav" aria-label="Main navigation">
+        <div class="warrior-nav-glass">
+            <div class="warrior-nav-content">
+                <a href="index.html" class="warrior-brand" aria-label="NavaFit Home"><img src="assets/images/nfl.png" alt="NavaFit"></a>
+                <div class="warrior-nav-links">
+                    <a href="training.html" class="warrior-nav-link" data-auth-guard>Training</a>
+                    <a href="ai-coach.html" class="warrior-nav-link" data-auth-guard>AI Seer</a>
+                    <a href="nutrition.html" class="warrior-nav-link" data-auth-guard>Nutrition</a>
+                    <a href="collectives.html" class="warrior-nav-link" data-auth-guard>Collectives</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="section">
+        <div class="glass-container">
+            <p class="promo-chip">Authenticate · Unlock Akhada</p>
+            <h1 class="glitch" data-text="Access Portal">Access Portal</h1>
+            <p class="text-gray-300 mt-4 max-w-2xl">Sign in with Google, Apple, or secure email to unlock the NavaFit Seer OS experience.</p>
+            <div data-auth-summary class="mt-4 text-gray-200"></div>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="grid-2">
+            <div class="glass-card p-6 space-y-4">
+                <button class="glass-cta w-full" data-auth-google>Continue with Google</button>
+                <button class="glass-cta w-full" data-auth-apple>Continue with Apple</button>
+                <div class="border-t border-white/10 pt-4">
+                    <p class="text-sm text-gray-400 uppercase tracking-[0.3em]" data-email-mode-label>Sign In with Email</p>
+                    <form data-auth-email-form class="space-y-3 mt-3">
+                        <input type="email" id="emailInput" placeholder="Email" required class="w-full bg-transparent border border-white/20 rounded-lg px-4 py-2 text-white">
+                        <input type="password" id="passwordInput" placeholder="Password" required class="w-full bg-transparent border border-white/20 rounded-lg px-4 py-2 text-white">
+                        <button type="submit" class="glass-cta w-full">Submit</button>
+                    </form>
+                    <button type="button" class="text-xs text-gray-400 mt-2" data-email-mode-toggle>Need an account? Switch to Sign Up</button>
+                </div>
+            </div>
+            <div class="glass-card p-6">
+                <p class="text-sm text-gray-400 uppercase tracking-[0.3em]">Status</p>
+                <p class="text-sm mt-3" data-auth-status></p>
+                <div class="mt-6 text-sm text-gray-400">
+                    <p>• Secure OAuth via Google and Apple</p>
+                    <p>• Email/password stored in Firebase Auth</p>
+                    <p>• Redirect back to original destination post-login</p>
+                    <p>• Session saved locally for instant access</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        window.NavaFitAuthConfig = {
+            enforceAuth: false
+        };
+    </script>
+    <script type="module" src="scripts/auth-guard.js"></script>
+    <script type="module" src="scripts/auth.js"></script>
+    <script type="module" src="scripts/navigation-warrior.js"></script>
+    <script type="module" src="scripts/animations.js"></script>
+</body>
+
+</html>

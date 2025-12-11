@@ -1,0 +1,273 @@
+/* Warrior Navigation System - 3D Glassmorphic Navigation */
+
+.warrior-nav {
+    position: fixed;
+    inset: 0 0 auto;
+    padding: 1.25rem clamp(1rem, 4vw, 3rem);
+    z-index: 1200;
+    background: linear-gradient(180deg, rgba(5, 5, 5, 0.85), transparent);
+}
+
+.warrior-nav-glass {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+    border-radius: 999px;
+    padding: 0.4rem 1.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(30px) saturate(180%);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), inset 0 0 1px rgba(255, 255, 255, 0.25);
+    transition: transform 450ms cubic-bezier(0.16, 1, 0.32, 1), box-shadow 450ms ease;
+}
+
+.warrior-nav-glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(0, 227, 140, 0.1), transparent);
+    opacity: 0;
+    transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+}
+
+.warrior-nav-content {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 2.5rem);
+}
+
+/* Brand Logo */
+.warrior-brand img {
+    height: 48px;
+    width: auto;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.45));
+    transition: transform 420ms cubic-bezier(0.16, 1, 0.32, 1);
+}
+
+.warrior-brand:hover img {
+    transform: scale(1.03);
+}
+
+/* Navigation Links */
+.warrior-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.warrior-nav-link {
+    position: relative;
+    color: var(--textColor);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    padding: 0.75rem 0.35rem;
+    text-transform: uppercase;
+    transition: color var(--transition-fast);
+}
+
+.warrior-nav-link::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0.35rem;
+    width: 32px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--prana), transparent);
+    transform: translateX(-50%) scaleX(0);
+    transition: transform 360ms cubic-bezier(0.16, 1, 0.32, 1);
+}
+
+.warrior-nav-link:hover {
+    color: var(--prana);
+}
+
+.warrior-nav-link:hover::after {
+    transform: translateX(-50%) scaleX(1);
+}
+
+/* CTA Buttons */
+.warrior-nav-cta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.warrior-cta-btn {
+    padding: 0.75rem 1.75rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: var(--textColor);
+    text-decoration: none;
+    transition: transform var(--transition-standard), border-color var(--transition-fast);
+}
+
+.warrior-cta-primary {
+    background: linear-gradient(120deg, rgba(178, 255, 158, 0.35), rgba(86, 242, 255, 0.28));
+}
+
+.warrior-cta-btn:hover {
+    transform: translateY(-4px);
+    border-color: rgba(178, 255, 158, 0.45);
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.45);
+}
+
+/* Mobile Hamburger */
+.warrior-hamburger {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    gap: 4px;
+}
+
+.warrior-hamburger span {
+    width: 25px;
+    height: 3px;
+    background: #FFFFFF;
+    border-radius: 2px;
+    transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.warrior-hamburger:hover span {
+    background: var(--neon);
+    box-shadow: 0 0 10px rgba(0, 227, 140, 0.5);
+}
+
+/* Mobile Menu */
+.warrior-mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    background: rgba(8, 10, 9, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.warrior-mobile-menu.active {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.warrior-mobile-menu-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.warrior-mobile-nav-link {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.warrior-mobile-nav-link:hover {
+    color: var(--neon);
+    text-shadow: 0 0 20px rgba(0, 227, 140, 0.6);
+    transform: scale(1.1);
+}
+
+.warrior-mobile-divider {
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--neon), transparent);
+    margin: 1rem 0;
+}
+
+.warrior-mobile-cta-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+.warrior-mobile-cta {
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+    border: 2px solid transparent;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    min-width: 200px;
+    text-align: center;
+}
+
+/* 3D Tilt Effect for Desktop */
+@media (min-width: 769px) {
+    .warrior-nav-glass:hover {
+        transform: rotateX(-5deg) rotateY(5deg) translateZ(10px);
+        box-shadow:
+            0 20px 40px 0 rgba(0, 227, 140, 0.2),
+            inset 0 1px 0 0 rgba(255, 255, 255, 0.2),
+            0 0 60px rgba(0, 227, 140, 0.1);
+    }
+
+    .warrior-nav-glass:hover::before {
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .warrior-nav {
+        padding: 1rem;
+    }
+
+    .warrior-nav-links {
+        display: none;
+    }
+
+    .warrior-nav-cta {
+        display: none;
+    }
+
+    .warrior-hamburger {
+        display: flex;
+    }
+
+    .warrior-nav-glass {
+        transform: none !important;
+    }
+
+    .warrior-nav-glass:active {
+        transform: scale(0.98) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .warrior-nav {
+        padding: 0.5rem;
+    }
+
+    .warrior-nav-content {
+        padding: 0.25rem 0.5rem;
+    }
+
+    .warrior-brand {
+        font-size: 1.25rem;
+    }
+}

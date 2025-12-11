@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="description" content="NavaFit Akhada - Traditional Hindu warrior training ground with modern AI enhancement">
+    <meta name="keywords" content="akhada training, Hindu warrior, combat training, yoga, breathwork, traditional fitness">
+    <title>Akhada Training Ground | NavaFit - Ancient Wisdom, Modern Fitness</title>
+
+    <!-- Core Styles -->
+    <link rel="stylesheet" href="styles/global-theme.css">
+    <link rel="stylesheet" href="styles/navigation-warrior.css">
+    <link rel="stylesheet" href="styles/animations-standard.css">
+
+    <!-- Fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;600;700&family=Roboto:wght@300;400;700&family=Open+Sans:wght@300;400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        neon: '#00E38C',
+                        'neon-blue': '#00B2FF',
+                        'bg-dark': '#080a09'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+</head>
+
+<body class="bg-bg-dark text-gray-200 font-hind min-h-screen">
+    <!-- Navigation -->
+    <nav class="warrior-nav" role="navigation" aria-label="Main navigation">
+        <div class="warrior-nav-glass nav-3d">
+            <div class="warrior-nav-content">
+                <a href="index.html" class="warrior-brand" aria-label="NavaFit Home">
+                    <img src="assets/images/nfl.png" alt="NavaFit Logo" class="h-10 w-auto" loading="eager" decoding="async" fetchpriority="high" />
+                </a>
+
+                <div class="warrior-nav-links" role="menubar">
+                    <a href="training.html" class="warrior-nav-link" role="menuitem">Training</a>
+                    <a href="ai-coach.html" class="warrior-nav-link" role="menuitem">AI Seer</a>
+                    <a href="nutrition.html" class="warrior-nav-link" role="menuitem">Nutrition</a>
+                    <a href="collectives.html" class="warrior-nav-link" role="menuitem">Collectives</a>
+                </div>
+
+                <div class="warrior-nav-cta">
+                    <a href="login.html" class="warrior-cta-btn warrior-cta-secondary">Login</a>
+                    <a href="signup.html" class="warrior-cta-btn warrior-cta-primary">Join</a>
+                </div>
+
+                <button class="warrior-hamburger" id="mobileMenuBtn" aria-label="Toggle navigation menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="warrior-mobile-menu" id="mobileMenu" aria-hidden="true">
+        <div class="warrior-mobile-menu-content">
+            <a href="training.html" class="warrior-mobile-nav-link">Training</a>
+            <a href="ai-coach.html" class="warrior-mobile-nav-link">AI Seer</a>
+            <a href="nutrition.html" class="warrior-mobile-nav-link">Nutrition</a>
+            <a href="collectives.html" class="warrior-mobile-nav-link">Collectives</a>
+            <div class="warrior-mobile-divider"></div>
+            <div class="warrior-mobile-cta-group">
+                <a href="login.html" class="warrior-mobile-cta warrior-cta-secondary">Login</a>
+                <a href="signup.html" class="warrior-mobile-cta warrior-cta-primary">Join</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="pt-24">
+        <!-- Hero Section -->
+        <section class="py-20 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-30">
+                <div class="absolute top-1/4 left-1/6 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl animate-pulse"></div>
+                <div class="absolute bottom-1/4 right-1/6 w-64 h-64 bg-red-500/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+            </div>
+
+            <div class="max-w-6xl mx-auto px-6 text-center relative z-10">
+                <h1 class="glitch hero-title text-5xl md:text-6xl font-bold mb-6" data-text="Sacred Akhada">
+                    Sacred Akhada
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto">
+                    Enter the <span class="text-neon font-bold">ancient training ground</span> where warriors forged their strength,
+                    discipline, and spirit. Experience <span class="text-orange-400 font-bold">traditional disciplines</span>
+                    enhanced by modern wisdom.
+                </p>
+                <div class="flex justify-center gap-6 flex-wrap">
+                    <a href="#training-disciplines" class="glass-cta cta-lg hover-lift">Explore Disciplines</a>
+                    <a href="ai-coach.html" class="glass-cta cta-lg hover-lift">Train with AI</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Training Disciplines -->
+        <section id="training-disciplines" class="py-20 bg-black/20">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="section-header text-center mb-16">Sacred Training Disciplines</h2>
+                <div class="grid lg:grid-cols-2 gap-8 mb-12">
+                    <!-- Combat Training -->
+                    <div class="glass-card hover-glow relative overflow-hidden p-8">
+                        <div class="absolute inset-0 bg-gradient-to-br from-red-500/10 to-orange-500/10"></div>
+                        <div class="relative z-10">
+                            <div class="text-6xl mb-6 text-center">⚔️</div>
+                            <h3 class="text-3xl font-bold text-white mb-4 text-center">Combat Training</h3>
+                            <p class="text-gray-300 mb-6 text-center">
+                                Master the art of warrior combat through traditional weapons training,
+                                hand-to-hand combat, and strategic movement patterns.
+                            </p>
+
+                            <div class="grid grid-cols-2 gap-4 mb-6">
+                                <div class="text-center">
+                                    <div class="text-2xl mb-2">🗡️</div>
+                                    <div class="text-sm text-gray-300">Sword Arts</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl mb-2">🏹</div>
+                                    <div class="text-sm text-gray-300">Archery</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl mb-2">🥊</div>
+                                    <div class="text-sm text-gray-300">Unarmed Combat</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl mb-2">🛡️</div>
+                                    <div class="text-sm text-gray-300">Defense Tactics</div>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button class="glass-cta hover-lift">Begin Combat Training</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Warrior Yoga -->
+                    <div class="glass-card hover-glow relative overflow-hidden p-8">
+                        <div class="absolute inset-0 bg-gradient-to-br from-neon/10 to-blue-500/10"></div>
+                        <div class="relative z-10">
+                            <div class="text-6xl mb-6 text-center">🧘‍♂️</div>
+                            <h3 class="text-3xl font-bold text-white mb-4 text-center">Warrior Yoga</h3>
+                            <p class="text-gray-300 mb-6 text-center">
+                                Dynamic yoga flows designed to build warrior strength, flexibility,
+                                and mental clarity through ancient asanas.
+                            </p>
+
+                            <div class="grid grid-cols-2 gap-4 mb-6">
+                                <div class="text-center">
+                                    <div class="text-2xl mb-2">💪</div>
+                                    <div class="text-sm text-gray-300">Power Vinyasa</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl mb-2">🌟</div>
+                                    <div class="text-sm text-gray-300">Warrior Poses</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl mb-2">🔥</div>
+                                    <div class="text-sm text-gray-300">Hot Yoga</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl mb-2">⚖️</div>
+                                    <div class="text-sm text-gray-300">Balance Training</div>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button class="glass-cta hover-lift">Start Yoga Practice</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Breathwork & Meditation -->
+                    <div class="glass-card hover-glow relative overflow-hidden p-8">
+                        <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-blue-500/10"></div>
+                        <div class="relative z-10">
+                            <div class="text-6xl mb-6 text-center">🌬️</div>
+                            <h3 class="text-3xl font-bold text-white mb-4 text-center">Breathwork & Meditation</h3>
+                            <p class="text-gray-300 mb-6 text-center">
+                                Master pranayama breathing techniques and deep meditation practices
+                                for energy cultivation and mental mastery.
+                            </p>
+
+                            <div class="grid grid-cols-2 gap-4 mb-6">
+                                <div class="text-center">
+                                    <div class="text-2xl mb-2">🌊</div>
+                                    <div class="text-sm text-gray-300">Pranayama</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl mb-2">🧠</div>
+                                    <div class="text-sm text-gray-300">Meditation</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl mb-2">⚡</div>
+                                    <div class="text-sm text-gray-300">Energy Work</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl mb-2">🕉️</div>
+                                    <div class="text-sm text-gray-300">Mantras</div>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button class="glass-cta hover-lift">Practice Breathwork</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Strength & Conditioning -->
+                    <div class="glass-card hover-glow relative overflow-hidden p-8">
+                        <div class="absolute inset-0 bg-gradient-to-br from-neon-blue/10 to-green-500/10"></div>
+                        <div class="relative z-10">
+                            <div class="text-6xl mb-6 text-center">💪</div>
+                            <h3 class="text-3xl font-bold text-white mb-4 text-center">Strength & Conditioning</h3>
+                            <p class="text-gray-300 mb-6 text-center">
+                                Build functional strength using traditional tools like mace (gada),
+                                clubs (joris), and bodyweight exercises.
+                            </p>
+
+                            <div class="grid grid-cols-2 gap-4 mb-6">
+                                <div class="text-center">
+                                    <div class="text-2xl mb-2">🔨</div>
+                                    <div class="text-sm text-gray-300">Mace Training</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl mb-2">🏋️</div>
+                                    <div class="text-sm text-gray-300">Club Swinging</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl mb-2">🤸</div>
+                                    <div class="text-sm text-gray-300">Bodyweight</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl mb-2">🏃</div>
+                                    <div class="text-sm text-gray-300">Endurance</div>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button class="glass-cta hover-lift">Build Strength</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Training Programs -->
+        <section class="py-20">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="section-header text-center mb-16">Akhada Training Programs</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Beginner Program -->
+                    <div class="glass-card hover-glow text-center p-6">
+                        <div class="text-5xl mb-4">🌱</div>
+                        <h3 class="text-2xl font-bold text-white mb-4">Warrior Initiate</h3>
+                        <p class="text-gray-300 mb-4">Perfect introduction to Akhada training</p>
+                        <div class="mb-4">
+                            <div class="text-sm text-gray-400 mb-2">Program Details:</div>
+                            <div class="text-sm text-neon">4 weeks • Beginner • 30 min/day</div>
+                        </div>
+                        <div class="mb-6 text-left">
+                            <div class="text-sm font-semibold text-gray-300 mb-2">Includes:</div>
+                            <ul class="text-sm text-gray-400 space-y-1">
+                                <li>• Basic yoga flows</li>
+                                <li>• Fundamental breathing</li>
+                                <li>• Light strength work</li>
+                                <li>• Meditation basics</li>
+                            </ul>
+                        </div>
+                        <button class="glass-cta w-full hover-lift">Start Journey</button>
+                    </div>
+
+                    <!-- Intermediate Program -->
+                    <div class="glass-card hover-glow text-center p-6 border-2 border-neon/30">
+                        <div class="text-5xl mb-4">⚔️</div>
+                        <h3 class="text-2xl font-bold text-neon mb-4">Akhada Warrior</h3>
+                        <p class="text-gray-300 mb-4">Traditional warrior training intensified</p>
+                        <div class="mb-4">
+                            <div class="text-sm text-gray-400 mb-2">Program Details:</div>
+                            <div class="text-sm text-neon">8 weeks • Intermediate • 45 min/day</div>
+                        </div>
+                        <div class="mb-6 text-left">
+                            <div class="text-sm font-semibold text-gray-300 mb-2">Includes:</div>
+                            <ul class="text-sm text-gray-400 space-y-1">
+                                <li>• Advanced combat forms</li>
+                                <li>• Mace & club training</li>
+                                <li>• Power yoga sequences</li>
+                                <li>• Energy cultivation</li>
+                            </ul>
+                        </div>
+                        <button class="glass-cta w-full hover-lift">Begin Training</button>
+                    </div>
+
+                    <!-- Advanced Program -->
+                    <div class="glass-card hover-glow text-center p-6">
+                        <div class="text-5xl mb-4">👑</div>
+                        <h3 class="text-2xl font-bold text-white mb-4">Master Warrior</h3>
+                        <p class="text-gray-300 mb-4">Elite warrior transformation program</p>
+                        <div class="mb-4">
+                            <div class="text-sm text-gray-400 mb-2">Program Details:</div>
+                            <div class="text-sm text-red-400">12 weeks • Advanced • 60 min/day</div>
+                        </div>
+                        <div class="mb-6 text-left">
+                            <div class="text-sm font-semibold text-gray-300 mb-2">Includes:</div>
+                            <ul class="text-sm text-gray-400 space-y-1">
+                                <li>• Master-level techniques</li>
+                                <li>• Weapon mastery</li>
+                                <li>• Advanced meditation</li>
+                                <li>• Personal mentorship</li>
+                            </ul>
+                        </div>
+                        <button class="glass-cta w-full hover-lift">Master Path</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Daily Rituals -->
+        <section class="py-20 bg-black/20">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="section-header text-center mb-16">Sacred Daily Rituals</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Morning Ritual -->
+                    <div class="glass-card hover-glow text-center p-6">
+                        <div class="text-4xl mb-4">🌅</div>
+                        <h3 class="text-lg font-bold text-white mb-3">Morning Awakening</h3>
+                        <p class="text-gray-300 text-sm mb-4">Sun salutations and energy activation</p>
+                        <div class="text-neon text-sm font-bold">5:00 AM • 20 min</div>
+                    </div>
+
+                    <!-- Training Ritual -->
+                    <div class="glass-card hover-glow text-center p-6">
+                        <div class="text-4xl mb-4">⚔️</div>
+                        <h3 class="text-lg font-bold text-white mb-3">Combat Practice</h3>
+                        <p class="text-gray-300 text-sm mb-4">Intensive warrior training session</p>
+                        <div class="text-orange-400 text-sm font-bold">6:00 AM • 45 min</div>
+                    </div>
+
+                    <!-- Meditation Ritual -->
+                    <div class="glass-card hover-glow text-center p-6">
+                        <div class="text-4xl mb-4">🧘</div>
+                        <h3 class="text-lg font-bold text-white mb-3">Inner Warrior</h3>
+                        <p class="text-gray-300 text-sm mb-4">Meditation and breath mastery</p>
+                        <div class="text-purple-400 text-sm font-bold">6:00 PM • 30 min</div>
+                    </div>
+
+                    <!-- Evening Ritual -->
+                    <div class="glass-card hover-glow text-center p-6">
+                        <div class="text-4xl mb-4">🌙</div>
+                        <h3 class="text-lg font-bold text-white mb-3">Evening Reflection</h3>
+                        <p class="text-gray-300 text-sm mb-4">Gratitude and recovery practices</p>
+                        <div class="text-blue-400 text-sm font-bold">9:00 PM • 15 min</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Philosophy Section -->
+        <section class="py-20">
+            <div class="max-w-6xl mx-auto px-6 text-center">
+                <h2 class="section-header mb-12">The Warrior's Path</h2>
+                <div class="glass-container relative overflow-hidden backdrop-blur-xl p-12">
+                    <div class="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-neon/5 to-purple-500/10"></div>
+                    <div class="relative z-10">
+                        <div class="text-7xl mb-8">🕉️</div>
+                        <blockquote class="text-2xl md:text-3xl italic font-light text-gray-200 mb-8">
+                            "The body is your temple. Keep it pure and clean for the soul to reside in."
+                        </blockquote>
+                        <p class="text-lg text-gray-300 mb-8 max-w-3xl mx-auto">
+                            In the sacred Akhada, we understand that true strength comes not just from muscle and bone,
+                            but from the harmonious union of <strong class="text-neon">body</strong>,
+                            <strong class="text-neon-blue">mind</strong>, and <strong class="text-purple-400">spirit</strong>.
+                            Every movement is a prayer, every breath a meditation, every challenge an opportunity for growth.
+                        </p>
+                        <div class="grid md:grid-cols-3 gap-8 mt-12">
+                            <div class="text-center">
+                                <div class="text-3xl mb-3">💪</div>
+                                <h4 class="text-lg font-bold text-neon mb-2">Shakti</h4>
+                                <p class="text-sm text-gray-400">Physical power and vitality</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl mb-3">🧠</div>
+                                <h4 class="text-lg font-bold text-neon-blue mb-2">Buddhi</h4>
+                                <p class="text-sm text-gray-400">Mental clarity and wisdom</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl mb-3">🕉️</div>
+                                <h4 class="text-lg font-bold text-purple-400 mb-2">Atma</h4>
+                                <p class="text-sm text-gray-400">Spiritual connection and purpose</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-20 bg-black/20 text-center">
+            <div class="max-w-4xl mx-auto px-6">
+                <h2 class="text-4xl font-bold text-white mb-6">Begin Your Warrior Journey</h2>
+                <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                    Step into the sacred Akhada and discover the ancient path to strength,
+                    wisdom, and inner peace. Your transformation awaits.
+                </p>
+                <div class="flex justify-center gap-6 flex-wrap">
+                    <a href="signup.html" class="glass-cta cta-lg hover-lift">Join the Akhada</a>
+                    <a href="ai-coach.html" class="glass-cta cta-lg hover-lift">Start AI Training</a>
+                    <a href="training-sg.html" class="glass-cta cta-lg hover-lift">View Programs</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-white/10 bg-black/30">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-gray-400">&copy; 2025 NavaFit. All rights reserved. Ancient wisdom for modern warriors.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module" src="scripts/navigation-warrior.js"></script>
+    <script type="module" src="scripts/animations.js"></script>
+    <script type="module" src="scripts/akhada-interactions.js"></script>
+</body>
+
+</html>

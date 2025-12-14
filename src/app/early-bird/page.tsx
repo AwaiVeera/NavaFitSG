@@ -9,50 +9,83 @@ export default function EarlyBirdPage() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: "",
+    whatsapp: "",
+    ageRange: "",
+    goal: "",
     question: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const encodeFormData = (data: Record<string, string>) =>
+    new URLSearchParams(data).toString();
+
+  const whatsappNumber = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "").replace(
+    /[^\d]/g,
+    ""
+  );
+  const whatsappPrefill =
+    "Hi Awai, I’m interested in NavaFit Rise of Dawn Earlybird. Can I book a free assessment?";
+  const whatsappHref =
+    whatsappNumber.length > 0
+      ? `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappPrefill)}`
+      : "https://wa.me/65XXXXXXXX";
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/early-bird", {
+      const isLocalhost =
+        typeof window !== "undefined" &&
+        (window.location.hostname === "localhost" ||
+          window.location.hostname === "127.0.0.1");
+
+      // Local dev doesn't run on Netlify, so skip network submit and show success UI.
+      if (isLocalhost) {
+        setIsSubmitted(true);
+        return;
+      }
+
+      const payload: Record<string, string> = {
+        "form-name": "earlybird",
+        "bot-field": "",
+        name: formData.name,
+        email: formData.email,
+        whatsapp: formData.whatsapp,
+        ageRange: formData.ageRange,
+        goal: formData.goal,
+        question: formData.question,
+      };
+
+      const response = await fetch("/", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          question: formData.question,
-        }),
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encodeFormData(payload),
       });
 
-      if (response.ok) {
-        setIsSubmitted(true);
-      } else {
-        // Fallback to mailto if server-side email fails for any reason
-        window.location.href = `mailto:awaiveera@navafit.sg?subject=${encodeURIComponent(
-          `NavaFit Rise-At-Dawn Lead: ${formData.name}`
-        )}&body=${encodeURIComponent(
-          `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nQuestion: ${formData.question}`
-        )}`;
-        setIsSubmitted(true);
-      }
+      if (!response.ok) throw new Error("Netlify form submit failed");
+
+      (window as any)?.gtag?.("event", "generate_lead", {
+        event_category: "engagement",
+        event_label: "earlybird_form",
+      });
+
+      setIsSubmitted(true);
     } catch {
+      // Fallback to mailto if form submit fails for any reason
       window.location.href = `mailto:awaiveera@navafit.sg?subject=${encodeURIComponent(
         `NavaFit Rise-At-Dawn Lead: ${formData.name}`
       )}&body=${encodeURIComponent(
-        `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nQuestion: ${formData.question}`
+        `Name: ${formData.name}\nEmail: ${formData.email}\nWhatsApp: ${formData.whatsapp}\nAge range: ${formData.ageRange}\nGoal: ${formData.goal}\nQuestion: ${formData.question}`
       )}`;
       setIsSubmitted(true);
     } finally {
@@ -425,14 +458,58 @@ export default function EarlyBirdPage() {
               </motion.div>
             </div>
 
+            {/* ════════════════════════════════════════════════════════
+                BHAGAVAD GITA QUOTE
+            ════════════════════════════════════════════════════════ */}
+            <div className="w-full pb-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.02 }}
+                className="relative rounded-3xl border border-white/10 bg-black/40 p-8 md:p-10 text-left overflow-hidden"
+              >
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "radial-gradient(circle at 70% 30%, rgba(0,191,255,0.12) 0%, transparent 55%)",
+                  }}
+                />
+                <div className="relative">
+                  <div className="text-[#00bfff] text-sm font-bold tracking-[0.3em]">
+                    BHAGAVAD GITA
+                  </div>
+                  <blockquote className="mt-4 text-xl md:text-2xl font-semibold leading-relaxed text-white">
+                    “You have the right to action alone, never to its fruits.
+                    Let not the fruits of action be your motive, nor let your
+                    attachment be to inaction.”
+                  </blockquote>
+                  <div className="mt-4 text-sm text-white/60">
+                    — Bhagavad Gita 2:47
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
             {!isSubmitted ? (
               <div className="relative">
                 <div className="absolute -inset-4 bg-[#4c8f60]/10 rounded-3xl blur-2xl" />
                 <form
                   id="lead-form"
+                  name="earlybird"
+                  method="POST"
+                  data-netlify="true"
+                  data-netlify-honeypot="bot-field"
                   onSubmit={handleSubmit}
                   className="relative p-10 md:p-12 rounded-3xl bg-[#0a1a0f]/95 border-2 border-[#4c8f60]/30"
                 >
+                  <input type="hidden" name="form-name" value="earlybird" />
+                  <p className="hidden">
+                    <label>
+                      Don’t fill this out: <input name="bot-field" />
+                    </label>
+                  </p>
+
                   <div className="text-center mb-10">
                     <h2 className="text-4xl md:text-5xl font-black text-white mb-3">
                       JOIN THE WARRIORS
@@ -454,6 +531,7 @@ export default function EarlyBirdPage() {
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="Enter your name"
+                        autoComplete="name"
                         className="w-full px-5 py-4 rounded-xl bg-[#061208] border-2 border-[#4c8f60]/40 text-white text-lg placeholder-[#3d6b4a] focus:outline-none focus:border-[#7dcea0] transition-all"
                       />
                     </div>
@@ -469,27 +547,76 @@ export default function EarlyBirdPage() {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="your@email.com"
+                        autoComplete="email"
                         className="w-full px-5 py-4 rounded-xl bg-[#061208] border-2 border-[#4c8f60]/40 text-white text-lg placeholder-[#3d6b4a] focus:outline-none focus:border-[#7dcea0] transition-all"
                       />
                     </div>
 
                     <div>
                       <label className="block text-[#7dcea0] text-sm font-bold mb-3 tracking-[0.15em]">
-                        PHONE NUMBER
+                        WHATSAPP NUMBER *
                       </label>
                       <input
                         type="tel"
-                        name="phone"
-                        value={formData.phone}
+                        name="whatsapp"
+                        required
+                        inputMode="tel"
+                        autoComplete="tel"
+                        value={formData.whatsapp}
                         onChange={handleChange}
-                        placeholder="+65 XXXX XXXX"
+                        placeholder="+65 9XXX XXXX"
                         className="w-full px-5 py-4 rounded-xl bg-[#061208] border-2 border-[#4c8f60]/40 text-white text-lg placeholder-[#3d6b4a] focus:outline-none focus:border-[#7dcea0] transition-all"
                       />
+                      <p className="mt-2 text-xs text-white/60">
+                        We’ll reply on WhatsApp with next steps for your free assessment.
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-[#7dcea0] text-sm font-bold mb-3 tracking-[0.15em]">
+                          AGE RANGE (OPTIONAL)
+                        </label>
+                        <select
+                          name="ageRange"
+                          value={formData.ageRange}
+                          onChange={handleChange}
+                          className="w-full px-5 py-4 rounded-xl bg-[#061208] border-2 border-[#4c8f60]/40 text-white text-lg focus:outline-none focus:border-[#7dcea0] transition-all"
+                        >
+                          <option value="">Select</option>
+                          <option value="18–24">18–24</option>
+                          <option value="25–34">25–34</option>
+                          <option value="35–44">35–44</option>
+                          <option value="45–54">45–54</option>
+                          <option value="55+">55+</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-[#7dcea0] text-sm font-bold mb-3 tracking-[0.15em]">
+                          PRIMARY GOAL *
+                        </label>
+                        <select
+                          name="goal"
+                          required
+                          value={formData.goal}
+                          onChange={handleChange}
+                          className="w-full px-5 py-4 rounded-xl bg-[#061208] border-2 border-[#4c8f60]/40 text-white text-lg focus:outline-none focus:border-[#7dcea0] transition-all"
+                        >
+                          <option value="" disabled>
+                            Select
+                          </option>
+                          <option value="Strength">Strength</option>
+                          <option value="Pain relief">Pain relief</option>
+                          <option value="Mobility">Mobility</option>
+                          <option value="Combat conditioning">Combat conditioning</option>
+                        </select>
+                      </div>
                     </div>
 
                     <div>
                       <label className="block text-[#7dcea0] text-sm font-bold mb-3 tracking-[0.15em]">
-                        QUESTION
+                        QUESTION (OPTIONAL)
                       </label>
                       <textarea
                         name="question"
@@ -516,10 +643,26 @@ export default function EarlyBirdPage() {
                       ) : (
                         <>
                           <Send className="w-6 h-6" />
-                          JOIN NOW
+                          GET EARLYBIRD ACCESS
                         </>
                       )}
                     </motion.button>
+
+                    <a
+                      href={whatsappHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() =>
+                        (window as any)?.gtag?.("event", "contact", {
+                          method: "whatsapp",
+                          event_category: "engagement",
+                          event_label: "earlybird_whatsapp",
+                        })
+                      }
+                      className="w-full mt-3 inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/[0.03] px-6 py-4 text-sm font-black tracking-[0.2em] hover:bg-white/[0.06] transition-all"
+                    >
+                      WHATSAPP US
+                    </a>
                   </div>
 
                   <p className="text-center text-[#3d6b4a] text-sm mt-6">

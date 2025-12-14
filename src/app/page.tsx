@@ -86,42 +86,63 @@ export default function RiseOfDawnPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-[#030806] text-white overflow-x-hidden">
+    <main className="min-h-screen bg-black text-white overflow-x-hidden">
       {/* ═══════════════════════════════════════════════════════════════
           NAVIGATION
       ═══════════════════════════════════════════════════════════════ */}
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-[#030806]/95 backdrop-blur-lg border-b border-[#4c8f60]/20"
+            ? "bg-black/95 backdrop-blur-lg border-b border-[#00bfff]/20"
             : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="relative w-12 h-12">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col items-center">
+          {/* Centered Logo with Neon Blue Glow */}
+          <Link href="/" className="flex items-center justify-center relative">
+            {/* Neon Blue Glow Background */}
+            <motion.div 
+              className="absolute inset-0 rounded-full"
+              animate={{
+                boxShadow: [
+                  "0 0 30px 10px rgba(0, 191, 255, 0.4), 0 0 60px 20px rgba(0, 191, 255, 0.2), 0 0 100px 40px rgba(0, 191, 255, 0.1)",
+                  "0 0 40px 15px rgba(0, 191, 255, 0.6), 0 0 80px 30px rgba(0, 191, 255, 0.3), 0 0 120px 50px rgba(0, 191, 255, 0.15)",
+                  "0 0 30px 10px rgba(0, 191, 255, 0.4), 0 0 60px 20px rgba(0, 191, 255, 0.2), 0 0 100px 40px rgba(0, 191, 255, 0.1)",
+                ]
+              }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              style={{ 
+                width: "180px", 
+                height: "180px", 
+                left: "50%", 
+                top: "50%", 
+                transform: "translate(-50%, -50%)",
+                background: "radial-gradient(circle, rgba(0, 191, 255, 0.15) 0%, transparent 70%)"
+              }}
+            />
+            <div className="relative w-[240px] h-[240px]">
               <Image
                 src="/images/nfl.png"
                 alt="NavaFit"
                 fill
                 className="object-contain"
+                style={{
+                  filter: "drop-shadow(0 0 10px rgba(0, 191, 255, 0.8)) drop-shadow(0 0 20px rgba(0, 191, 255, 0.5)) drop-shadow(0 0 30px rgba(0, 191, 255, 0.3))"
+                }}
                 priority
               />
             </div>
-            <span className="text-xl font-bold tracking-wider hidden sm:block">
-              NAVAFIT
-            </span>
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-8">
-            <Link href="#offerings" className="text-sm tracking-wider hover:text-[#7dcea0] transition-colors">
+          <div className="hidden md:flex items-center gap-8 mt-4">
+            <Link href="#offerings" className="text-sm tracking-wider hover:text-[#00bfff] transition-colors">
               TRAINING
             </Link>
-            <Link href="#wisdom" className="text-sm tracking-wider hover:text-[#7dcea0] transition-colors">
+            <Link href="#wisdom" className="text-sm tracking-wider hover:text-[#00bfff] transition-colors">
               PHILOSOPHY
             </Link>
-            <Link href="#founder" className="text-sm tracking-wider hover:text-[#7dcea0] transition-colors">
+            <Link href="#founder" className="text-sm tracking-wider hover:text-[#00bfff] transition-colors">
               FOUNDER
             </Link>
             <Link
@@ -135,7 +156,7 @@ export default function RiseOfDawnPage() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2"
+            className="md:hidden absolute right-6 top-6 p-2"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -146,7 +167,7 @@ export default function RiseOfDawnPage() {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="md:hidden absolute top-full left-0 right-0 bg-[#030806]/98 backdrop-blur-lg border-b border-[#4c8f60]/20 p-6"
+            className="md:hidden absolute top-full left-0 right-0 bg-black/98 backdrop-blur-lg border-b border-[#00bfff]/20 p-6"
           >
             <div className="flex flex-col gap-4">
               <Link href="#offerings" className="text-lg" onClick={() => setIsMenuOpen(false)}>
@@ -176,42 +197,25 @@ export default function RiseOfDawnPage() {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0">
-          {/* Gradient Background */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0a1a12] via-[#030806] to-[#030806]" />
-          
-          {/* Radial Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] bg-[radial-gradient(circle,rgba(76,143,96,0.15)_0%,transparent_50%)]" />
-          
-          {/* Sanskrit Symbol */}
-          <motion.div 
+          {/* Black Background */}
+          <div className="absolute inset-0 bg-black" />
+
+          {/* Background watermark: nfil.png (glowing, 35% opacity) */}
+          <motion.div
             style={{ opacity, scale }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[50vw] font-bold text-[#0d1f12]/50 select-none pointer-events-none"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] max-w-[900px] max-h-[900px] select-none pointer-events-none"
           >
-            ॐ
+            <Image
+              src="/images/nfil.png"
+              alt="NavaFit Background"
+              fill
+              className="object-contain opacity-35"
+              style={{
+                filter:
+                  "drop-shadow(0 0 18px rgba(0, 191, 255, 0.45)) drop-shadow(0 0 48px rgba(0, 191, 255, 0.18))",
+              }}
+            />
           </motion.div>
-          
-          {/* Animated Particles */}
-          <div className="absolute inset-0 overflow-hidden">
-            {[...Array(20)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-1 h-1 bg-[#4c8f60]/30 rounded-full"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                }}
-                animate={{
-                  y: [0, -100, 0],
-                  opacity: [0, 1, 0],
-                }}
-                transition={{
-                  duration: 3 + Math.random() * 2,
-                  repeat: Infinity,
-                  delay: Math.random() * 2,
-                }}
-              />
-            ))}
-          </div>
         </div>
 
         {/* Hero Content */}
@@ -615,16 +619,31 @@ export default function RiseOfDawnPage() {
       <footer className="py-12 border-t border-[#4c8f60]/20">
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="flex items-center gap-4">
-              <div className="relative w-10 h-10">
+            <div className="flex items-center relative">
+              {/* Neon Blue Glow for Footer Logo */}
+              <div 
+                className="absolute rounded-full"
+                style={{ 
+                  width: "100px", 
+                  height: "100px", 
+                  left: "50%", 
+                  top: "50%", 
+                  transform: "translate(-50%, -50%)",
+                  boxShadow: "0 0 25px 8px rgba(0, 191, 255, 0.4), 0 0 50px 15px rgba(0, 191, 255, 0.2)",
+                  background: "radial-gradient(circle, rgba(0, 191, 255, 0.1) 0%, transparent 70%)"
+                }}
+              />
+              <div className="relative w-32 h-32">
                 <Image
                   src="/images/nfl.png"
                   alt="NavaFit"
                   fill
                   className="object-contain"
+                  style={{
+                    filter: "drop-shadow(0 0 8px rgba(0, 191, 255, 0.8)) drop-shadow(0 0 15px rgba(0, 191, 255, 0.5))"
+                  }}
                 />
               </div>
-              <span className="font-bold tracking-wider">NAVAFIT</span>
             </div>
 
             <div className="flex items-center gap-8">

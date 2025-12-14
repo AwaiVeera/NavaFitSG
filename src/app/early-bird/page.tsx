@@ -26,7 +26,7 @@ export default function EarlyBirdPage() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("https://formspree.io/f/xpwzgvkd", {
+      const response = await fetch("/api/early-bird", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -34,14 +34,13 @@ export default function EarlyBirdPage() {
           email: formData.email,
           phone: formData.phone,
           question: formData.question,
-          _replyto: formData.email,
-          _subject: `🌅 NavaFit Rise-At-Dawn Lead: ${formData.name}`,
         }),
       });
 
       if (response.ok) {
         setIsSubmitted(true);
       } else {
+        // Fallback to mailto if server-side email fails for any reason
         window.location.href = `mailto:awaiveera@navafit.sg?subject=${encodeURIComponent(
           `NavaFit Rise-At-Dawn Lead: ${formData.name}`
         )}&body=${encodeURIComponent(
@@ -68,13 +67,67 @@ export default function EarlyBirdPage() {
     { title: "आहार", subtitle: "NUTRITION", image: "/images/nutri.png" },
   ];
 
+  const pricingTiers = [
+    {
+      id: "starter",
+      name: "Starter",
+      tagline: "Busy professionals • consistency first",
+      sessions: "4 sessions / month",
+      highlight: false,
+      includes: [
+        "FREE 1:1 assessment (movement + goals)",
+        "Online materials (at‑home training until AI Coach launches)",
+        "Program guidance for recovery + mobility",
+        "Earlybird spots limited",
+      ],
+    },
+    {
+      id: "warrior",
+      name: "Warrior Build",
+      tagline: "Most popular • strength + mobility",
+      sessions: "6 sessions / month",
+      highlight: true,
+      includes: [
+        "FREE 1:1 assessment (movement + goals)",
+        "Online materials (at‑home training until AI Coach launches)",
+        "Priority booking windows (limited)",
+        "Earlybird spots limited",
+      ],
+    },
+    {
+      id: "elite",
+      name: "Elite Transformation",
+      tagline: "Best value • fastest progress",
+      sessions: "8 sessions / month",
+      highlight: false,
+      includes: [
+        "FREE 1:1 assessment (movement + goals)",
+        "Online materials (at‑home training until AI Coach launches)",
+        "Higher touch programming support",
+        "Earlybird spots limited",
+      ],
+    },
+  ];
+
   return (
-    <main className="min-h-screen bg-[#030806]">
+    <main className="min-h-screen bg-black text-white">
       {/* Background */}
       <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1400px] h-[1400px] bg-[radial-gradient(circle,rgba(34,85,51,0.1)_0%,transparent_50%)]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[40vw] font-bold text-[#0d1f12] select-none">
-          ॐ
+        <div className="absolute inset-0 bg-black" />
+
+        {/* Background watermark: nfil.png (glowing, 35% opacity) */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] max-w-[900px] max-h-[900px] select-none">
+          <Image
+            src="/images/nfil.png"
+            alt="NavaFit Background"
+            fill
+            className="object-contain opacity-35"
+            style={{
+              filter:
+                "drop-shadow(0 0 18px rgba(0, 191, 255, 0.45)) drop-shadow(0 0 48px rgba(0, 191, 255, 0.18))",
+            }}
+            priority
+          />
         </div>
       </div>
 
@@ -220,10 +273,163 @@ export default function EarlyBirdPage() {
             transition={{ delay: 0.8 }}
             className="w-full max-w-xl"
           >
+            {/* ════════════════════════════════════════════════════════
+                PRICING (3 TIERS)
+            ════════════════════════════════════════════════════════ */}
+            <div className="w-full flex flex-col items-center text-center px-0 pb-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.65 }}
+                className="mb-6"
+              >
+                <span className="text-[#00bfff] text-sm font-bold tracking-[0.3em]">
+                  EARLYBIRD TIERS
+                </span>
+                <h2 className="mt-4 text-4xl md:text-5xl font-black">
+                  Choose your training rhythm
+                </h2>
+                <p className="mt-4 text-[#9dcfae] text-lg md:text-xl leading-relaxed">
+                  Built for young professionals and older clients in Singapore — strength,
+                  mobility, and confident movement.
+                </p>
+              </motion.div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+                {pricingTiers.map((tier, idx) => (
+                  <motion.div
+                    key={tier.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.75 + idx * 0.08 }}
+                    className={`relative rounded-3xl border ${
+                      tier.highlight
+                        ? "border-[#00bfff]/50 bg-[#061018]/80 shadow-[0_0_40px_rgba(0,191,255,0.15)]"
+                        : "border-white/10 bg-white/[0.04]"
+                    } p-8`}
+                  >
+                    {tier.highlight && (
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#00bfff] text-black text-xs font-black tracking-[0.2em]">
+                        MOST POPULAR
+                      </div>
+                    )}
+
+                    <div className="text-left">
+                      <div className="text-2xl font-black">{tier.name}</div>
+                      <div className="mt-2 text-sm text-white/70">{tier.tagline}</div>
+
+                      <div className="mt-6 rounded-2xl border border-white/10 bg-black/40 p-4">
+                        <div className="text-[#00bfff] text-xs font-bold tracking-[0.25em]">
+                          TRAINING FREQUENCY
+                        </div>
+                        <div className="mt-1 text-lg font-black">{tier.sessions}</div>
+                      </div>
+
+                      <ul className="mt-6 space-y-3 text-sm text-white/80">
+                        {tier.includes.map((item) => (
+                          <li key={item} className="flex gap-3">
+                            <span className="mt-1 inline-block w-1.5 h-1.5 rounded-full bg-[#00bfff]" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+
+                      <div className="mt-6">
+                        <a
+                          href="#lead-form"
+                          className={`inline-flex w-full items-center justify-center rounded-xl px-5 py-4 text-sm font-black tracking-[0.2em] transition-all ${
+                            tier.highlight
+                              ? "bg-[#00bfff] text-black hover:shadow-[0_0_30px_rgba(0,191,255,0.35)]"
+                              : "border border-white/15 bg-white/[0.03] hover:bg-white/[0.06]"
+                          }`}
+                        >
+                          GET EARLYBIRD ACCESS
+                        </a>
+                        <p className="mt-3 text-xs text-white/50">
+                          Exact pricing is shared after your free assessment — to match your
+                          goals and schedule.
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* ════════════════════════════════════════════════════════
+                FOUNDER
+            ════════════════════════════════════════════════════════ */}
+            <div className="w-full pb-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.92 }}
+                className="relative rounded-3xl border border-white/10 bg-white/[0.04] overflow-hidden"
+              >
+                <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(circle at 30% 20%, rgba(0,191,255,0.12) 0%, transparent 55%)" }} />
+                <div className="relative grid grid-cols-1 md:grid-cols-2 gap-0">
+                  <div className="relative aspect-[4/3] md:aspect-auto md:min-h-[420px]">
+                    <Image
+                      src="/images/G1.jpeg"
+                      alt="Awai Veera — Founder, NavaFit"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      priority={false}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                  </div>
+
+                  <div className="p-8 md:p-10 text-left">
+                    <div className="text-[#00bfff] text-sm font-bold tracking-[0.3em]">
+                      FOUNDER
+                    </div>
+                    <h3 className="mt-3 text-3xl md:text-4xl font-black">
+                      Awai Veera
+                    </h3>
+                    <p className="mt-4 text-white/80 leading-relaxed">
+                      NavaFit is built on a simple belief:{" "}
+                      <span className="text-white font-bold">
+                        discipline should feel empowering, not punishing.
+                      </span>{" "}
+                      This is Hindu warrior training — strength, breath, and mobility —
+                      shaped for modern life in Singapore.
+                    </p>
+                    <p className="mt-4 text-white/70 leading-relaxed">
+                      If you’re a young professional rebuilding consistency, or an older
+                      client looking for confident, pain‑reduced movement, your plan will
+                      be tailored — with a free assessment first.
+                    </p>
+
+                    <div className="mt-6 flex flex-col sm:flex-row gap-3">
+                      <a
+                        href="#lead-form"
+                        className="inline-flex items-center justify-center rounded-xl bg-[#00bfff] text-black px-6 py-4 text-sm font-black tracking-[0.2em] hover:shadow-[0_0_30px_rgba(0,191,255,0.35)] transition-all"
+                      >
+                        BOOK FREE ASSESSMENT
+                      </a>
+                      <a
+                        href="#lead-form"
+                        className="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/[0.03] px-6 py-4 text-sm font-black tracking-[0.2em] hover:bg-white/[0.06] transition-all"
+                      >
+                        GET EARLYBIRD ACCESS
+                      </a>
+                    </div>
+
+                    <p className="mt-4 text-xs text-white/50">
+                      No hard sell. Just clarity: where you are now, and the fastest path
+                      to progress.
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
             {!isSubmitted ? (
               <div className="relative">
                 <div className="absolute -inset-4 bg-[#4c8f60]/10 rounded-3xl blur-2xl" />
                 <form
+                  id="lead-form"
                   onSubmit={handleSubmit}
                   className="relative p-10 md:p-12 rounded-3xl bg-[#0a1a0f]/95 border-2 border-[#4c8f60]/30"
                 >

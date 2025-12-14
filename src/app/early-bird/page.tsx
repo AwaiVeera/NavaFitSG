@@ -149,19 +149,26 @@ export default function EarlyBirdPage() {
         <div className="absolute inset-0 bg-black" />
 
         {/* Background watermark: nfil.png (glowing, 35% opacity) */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] max-w-[900px] max-h-[900px] select-none">
+        <motion.div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] max-w-[900px] max-h-[900px] select-none"
+          animate={{
+            scale: [1, 1.03, 1],
+            opacity: [0.28, 0.35, 0.28],
+          }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        >
           <Image
             src="/images/nfil.png"
             alt="NavaFit Background"
             fill
-            className="object-contain opacity-35"
+            className="object-contain"
             style={{
               filter:
                 "drop-shadow(0 0 18px rgba(0, 191, 255, 0.45)) drop-shadow(0 0 48px rgba(0, 191, 255, 0.18))",
             }}
             priority
           />
-        </div>
+        </motion.div>
       </div>
 
       {/* Content */}
@@ -222,13 +229,13 @@ export default function EarlyBirdPage() {
             className="mb-10"
           >
             <span 
-              className="block text-6xl md:text-8xl lg:text-9xl font-black text-white"
+              className="block text-6xl md:text-8xl lg:text-9xl font-black text-white text-glow-hover font-heading"
               style={{ textShadow: '0 0 80px rgba(76,143,96,0.3)' }}
             >
               EARLY ACCESS
             </span>
             <span 
-              className="block text-5xl md:text-7xl lg:text-8xl font-black mt-4"
+              className="block text-5xl md:text-7xl lg:text-8xl font-black mt-4 text-glow-hover font-subheading"
               style={{ 
                 background: 'linear-gradient(135deg, #4c8f60 0%, #7dcea0 50%, #4c8f60 100%)',
                 WebkitBackgroundClip: 'text',
@@ -319,7 +326,7 @@ export default function EarlyBirdPage() {
                 <span className="text-[#00bfff] text-sm font-bold tracking-[0.3em]">
                   EARLYBIRD TIERS
                 </span>
-                <h2 className="mt-4 text-4xl md:text-5xl font-black">
+                <h2 className="mt-4 text-4xl md:text-5xl font-black text-glow-hover font-heading">
                   Choose your training rhythm
                 </h2>
                 <p className="mt-4 text-[#9dcfae] text-lg md:text-xl leading-relaxed">
@@ -342,20 +349,20 @@ export default function EarlyBirdPage() {
                     } p-8`}
                   >
                     {tier.highlight && (
-                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#00bfff] text-black text-xs font-black tracking-[0.2em]">
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#00bfff] text-black text-xs font-black tracking-[0.2em] font-subheading">
                         MOST POPULAR
                       </div>
                     )}
 
                     <div className="text-left">
-                      <div className="text-2xl font-black">{tier.name}</div>
-                      <div className="mt-2 text-sm text-white/70">{tier.tagline}</div>
+                      <div className="text-2xl font-black font-heading">{tier.name}</div>
+                      <div className="mt-2 text-sm text-white/70 font-subheading">{tier.tagline}</div>
 
                       <div className="mt-6 rounded-2xl border border-white/10 bg-black/40 p-4">
-                        <div className="text-[#00bfff] text-xs font-bold tracking-[0.25em]">
+                        <div className="text-[#00bfff] text-xs font-bold tracking-[0.25em] font-subheading">
                           TRAINING FREQUENCY
                         </div>
-                        <div className="mt-1 text-lg font-black">{tier.sessions}</div>
+                        <div className="mt-1 text-lg font-black font-subheading">{tier.sessions}</div>
                       </div>
 
                       <ul className="mt-6 space-y-3 text-sm text-white/80">
@@ -414,10 +421,10 @@ export default function EarlyBirdPage() {
                   </div>
 
                   <div className="p-8 md:p-10 text-left">
-                    <div className="text-[#00bfff] text-sm font-bold tracking-[0.3em]">
+                    <div className="text-[#00bfff] text-sm font-bold tracking-[0.3em] font-subheading">
                       FOUNDER
                     </div>
-                    <h3 className="mt-3 text-3xl md:text-4xl font-black">
+                    <h3 className="mt-3 text-3xl md:text-4xl font-black text-glow-hover font-heading">
                       Awai Veera
                     </h3>
                     <p className="mt-4 text-white/80 leading-relaxed">
@@ -432,26 +439,6 @@ export default function EarlyBirdPage() {
                       If you’re a young professional rebuilding consistency, or an older
                       client looking for confident, pain‑reduced movement, your plan will
                       be tailored — with a free assessment first.
-                    </p>
-
-                    <div className="mt-6 flex flex-col sm:flex-row gap-3">
-                      <a
-                        href="#lead-form"
-                        className="inline-flex items-center justify-center rounded-xl bg-[#00bfff] text-black px-6 py-4 text-sm font-black tracking-[0.2em] hover:shadow-[0_0_30px_rgba(0,191,255,0.35)] transition-all"
-                      >
-                        BOOK FREE ASSESSMENT
-                      </a>
-                      <a
-                        href="#lead-form"
-                        className="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/[0.03] px-6 py-4 text-sm font-black tracking-[0.2em] hover:bg-white/[0.06] transition-all"
-                      >
-                        GET EARLYBIRD ACCESS
-                      </a>
-                    </div>
-
-                    <p className="mt-4 text-xs text-white/50">
-                      No hard sell. Just clarity: where you are now, and the fastest path
-                      to progress.
                     </p>
                   </div>
                 </div>
@@ -476,7 +463,7 @@ export default function EarlyBirdPage() {
                   }}
                 />
                 <div className="relative">
-                  <div className="text-[#00bfff] text-sm font-bold tracking-[0.3em]">
+                  <div className="text-[#00bfff] text-sm font-bold tracking-[0.3em] font-subheading">
                     BHAGAVAD GITA
                   </div>
                   <blockquote className="mt-4 text-xl md:text-2xl font-semibold leading-relaxed text-white">
@@ -511,7 +498,7 @@ export default function EarlyBirdPage() {
                   </p>
 
                   <div className="text-center mb-10">
-                    <h2 className="text-4xl md:text-5xl font-black text-white mb-3">
+                    <h2 className="text-4xl md:text-5xl font-black text-white mb-3 font-heading">
                       JOIN THE WARRIORS
                     </h2>
                     <p className="text-[#7dcea0] text-xl">
@@ -521,7 +508,7 @@ export default function EarlyBirdPage() {
 
                   <div className="space-y-6">
                     <div>
-                      <label className="block text-[#7dcea0] text-sm font-bold mb-3 tracking-[0.15em]">
+                      <label className="block text-[#7dcea0] text-sm font-bold mb-3 tracking-[0.15em] font-subheading">
                         FULL NAME *
                       </label>
                       <input
@@ -537,7 +524,7 @@ export default function EarlyBirdPage() {
                     </div>
 
                     <div>
-                      <label className="block text-[#7dcea0] text-sm font-bold mb-3 tracking-[0.15em]">
+                      <label className="block text-[#7dcea0] text-sm font-bold mb-3 tracking-[0.15em] font-subheading">
                         EMAIL ADDRESS *
                       </label>
                       <input
@@ -553,7 +540,7 @@ export default function EarlyBirdPage() {
                     </div>
 
                     <div>
-                      <label className="block text-[#7dcea0] text-sm font-bold mb-3 tracking-[0.15em]">
+                      <label className="block text-[#7dcea0] text-sm font-bold mb-3 tracking-[0.15em] font-subheading">
                         WHATSAPP NUMBER *
                       </label>
                       <input
@@ -574,7 +561,7 @@ export default function EarlyBirdPage() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-[#7dcea0] text-sm font-bold mb-3 tracking-[0.15em]">
+                        <label className="block text-[#7dcea0] text-sm font-bold mb-3 tracking-[0.15em] font-subheading">
                           AGE RANGE (OPTIONAL)
                         </label>
                         <select
@@ -593,7 +580,7 @@ export default function EarlyBirdPage() {
                       </div>
 
                       <div>
-                        <label className="block text-[#7dcea0] text-sm font-bold mb-3 tracking-[0.15em]">
+                        <label className="block text-[#7dcea0] text-sm font-bold mb-3 tracking-[0.15em] font-subheading">
                           PRIMARY GOAL *
                         </label>
                         <select
@@ -615,7 +602,7 @@ export default function EarlyBirdPage() {
                     </div>
 
                     <div>
-                      <label className="block text-[#7dcea0] text-sm font-bold mb-3 tracking-[0.15em]">
+                      <label className="block text-[#7dcea0] text-sm font-bold mb-3 tracking-[0.15em] font-subheading">
                         QUESTION (OPTIONAL)
                       </label>
                       <textarea

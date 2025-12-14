@@ -136,18 +136,18 @@ export default function RiseOfDawnPage() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8 mt-4">
-            <Link href="#offerings" className="text-sm tracking-wider hover:text-[#00bfff] transition-colors">
+            <Link href="#offerings" className="text-sm tracking-wider hover:text-[#00bfff] transition-colors font-subheading">
               TRAINING
             </Link>
-            <Link href="#wisdom" className="text-sm tracking-wider hover:text-[#00bfff] transition-colors">
+            <Link href="#wisdom" className="text-sm tracking-wider hover:text-[#00bfff] transition-colors font-subheading">
               PHILOSOPHY
             </Link>
-            <Link href="#founder" className="text-sm tracking-wider hover:text-[#00bfff] transition-colors">
+            <Link href="#founder" className="text-sm tracking-wider hover:text-[#00bfff] transition-colors font-subheading">
               FOUNDER
             </Link>
             <Link
               href="/early-bird"
-              className="px-6 py-2.5 bg-gradient-to-r from-[#3d7a4f] to-[#4c8f60] rounded-full text-sm font-bold tracking-wider hover:shadow-[0_0_30px_rgba(76,143,96,0.5)] transition-all"
+              className="px-6 py-2.5 bg-gradient-to-r from-[#3d7a4f] to-[#4c8f60] rounded-full text-sm font-bold tracking-wider hover:shadow-[0_0_30px_rgba(76,143,96,0.5)] transition-all font-subheading"
             >
               JOIN NOW
             </Link>
@@ -170,18 +170,18 @@ export default function RiseOfDawnPage() {
             className="md:hidden absolute top-full left-0 right-0 bg-black/98 backdrop-blur-lg border-b border-[#00bfff]/20 p-6"
           >
             <div className="flex flex-col gap-4">
-              <Link href="#offerings" className="text-lg" onClick={() => setIsMenuOpen(false)}>
+              <Link href="#offerings" className="text-lg font-subheading" onClick={() => setIsMenuOpen(false)}>
                 Training
               </Link>
-              <Link href="#wisdom" className="text-lg" onClick={() => setIsMenuOpen(false)}>
+              <Link href="#wisdom" className="text-lg font-subheading" onClick={() => setIsMenuOpen(false)}>
                 Philosophy
               </Link>
-              <Link href="#founder" className="text-lg" onClick={() => setIsMenuOpen(false)}>
+              <Link href="#founder" className="text-lg font-subheading" onClick={() => setIsMenuOpen(false)}>
                 Founder
               </Link>
               <Link
                 href="/early-bird"
-                className="mt-4 px-6 py-3 bg-gradient-to-r from-[#3d7a4f] to-[#4c8f60] rounded-full text-center font-bold"
+                className="mt-4 px-6 py-3 bg-gradient-to-r from-[#3d7a4f] to-[#4c8f60] rounded-full text-center font-bold font-subheading"
                 onClick={() => setIsMenuOpen(false)}
               >
                 JOIN NOW
@@ -205,16 +205,25 @@ export default function RiseOfDawnPage() {
             style={{ opacity, scale }}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] max-w-[900px] max-h-[900px] select-none pointer-events-none"
           >
-            <Image
-              src="/images/nfil.png"
-              alt="NavaFit Background"
-              fill
-              className="object-contain opacity-35"
-              style={{
-                filter:
-                  "drop-shadow(0 0 18px rgba(0, 191, 255, 0.45)) drop-shadow(0 0 48px rgba(0, 191, 255, 0.18))",
+            <motion.div
+              className="relative w-full h-full"
+              animate={{
+                scale: [1, 1.03, 1],
+                opacity: [0.28, 0.35, 0.28],
               }}
-            />
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Image
+                src="/images/nfil.png"
+                alt="NavaFit Background"
+                fill
+                className="object-contain"
+                style={{
+                  filter:
+                    "drop-shadow(0 0 18px rgba(0, 191, 255, 0.45)) drop-shadow(0 0 48px rgba(0, 191, 255, 0.18))",
+                }}
+              />
+            </motion.div>
           </motion.div>
         </div>
 
@@ -233,7 +242,7 @@ export default function RiseOfDawnPage() {
               className="inline-flex items-center gap-2 px-6 py-2 rounded-full border border-[#4c8f60]/50 bg-[#4c8f60]/10 mb-8"
             >
               <Zap className="w-4 h-4 text-[#7dcea0]" />
-              <span className="text-[#7dcea0] text-sm font-semibold tracking-[0.2em]">
+              <span className="text-[#7dcea0] text-sm font-semibold tracking-[0.2em] font-subheading">
                 ANCIENT WISDOM • MODERN POWER
               </span>
             </motion.div>
@@ -244,7 +253,7 @@ export default function RiseOfDawnPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight"
+                className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-glow-hover font-heading"
                 style={{ textShadow: "0 0 80px rgba(76,143,96,0.3)" }}
               >
                 RISE OF DAWN
@@ -253,7 +262,7 @@ export default function RiseOfDawnPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mt-4 text-[#9dcfae]"
+                className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mt-4 text-[#9dcfae] text-glow-hover font-subheading"
               >
                 The Hindu Warrior&apos;s Awakening
               </motion.span>
@@ -333,7 +342,7 @@ export default function RiseOfDawnPage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <span className="text-[#7dcea0] text-sm font-bold tracking-[0.3em] mb-4 block">
+            <span className="text-[#7dcea0] text-sm font-bold tracking-[0.3em] mb-4 block font-subheading">
               THE PHILOSOPHY
             </span>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6">
@@ -404,7 +413,7 @@ export default function RiseOfDawnPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <span className="text-[#7dcea0] text-sm font-bold tracking-[0.3em] mb-4 block">
+            <span className="text-[#7dcea0] text-sm font-bold tracking-[0.3em] mb-4 block font-subheading">
               TRAINING PILLARS
             </span>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6">
@@ -456,7 +465,7 @@ export default function RiseOfDawnPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <span className="text-[#7dcea0] text-sm font-bold tracking-[0.3em] mb-4 block">
+              <span className="text-[#7dcea0] text-sm font-bold tracking-[0.3em] mb-4 block font-subheading">
                 YOUR GUIDE
               </span>
               <h2 className="text-4xl md:text-5xl font-black mb-6">
@@ -528,7 +537,7 @@ export default function RiseOfDawnPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <span className="text-[#7dcea0] text-sm font-bold tracking-[0.3em] mb-4 block">
+            <span className="text-[#7dcea0] text-sm font-bold tracking-[0.3em] mb-4 block font-subheading">
               WARRIOR VOICES
             </span>
             <h2 className="text-4xl md:text-5xl font-black">

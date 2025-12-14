@@ -1,6 +1,28 @@
 import type { Metadata, Viewport } from "next";
+import { Hind, Rajdhani, Teko } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+
+const fontBody = Hind({
+  subsets: ["latin", "devanagari"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-body",
+  display: "swap",
+});
+
+const fontHeading = Teko({
+  subsets: ["latin", "devanagari"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-heading",
+  display: "swap",
+});
+
+const fontSubheading = Rajdhani({
+  subsets: ["latin", "devanagari"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-subheading",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://navafit.sg"),
@@ -55,13 +77,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link 
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" 
-          rel="stylesheet" 
-        />
-
         {gaId ? (
           <>
             <Script
@@ -79,7 +94,9 @@ export default function RootLayout({
           </>
         ) : null}
       </head>
-      <body className="antialiased font-sans">
+      <body
+        className={`${fontBody.variable} ${fontHeading.variable} ${fontSubheading.variable} antialiased font-body`}
+      >
         {children}
       </body>
     </html>

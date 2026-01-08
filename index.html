@@ -15,7 +15,71 @@
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; video-src 'self' blob:; connect-src 'self' https://www.gstatic.com https://www.googleapis.com; frame-src 'none'; object-src 'none'; base-uri 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; video-src 'self' blob:; connect-src 'self' http://127.0.0.1:7242 https://www.gstatic.com https://www.googleapis.com; frame-src 'none'; object-src 'none'; base-uri 'self';">
+
+    <script>
+        (function() {
+            const ENDPOINT = 'http://127.0.0.1:7242/ingest/0d18ea4d-2457-4664-b9ba-4027efd79013';
+
+            function shouldLogHref(href) {
+                return href === 'signup.html' || href.includes('mode=signup');
+            }
+
+            // #region agent log
+            fetch(ENDPOINT, {
+                method: 'POST',
+                keepalive: true,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    sessionId: 'debug-session',
+                    runId: 'post-fix',
+                    hypothesisId: 'H4',
+                    location: 'index.html:headInit',
+                    message: 'Head logger initialized',
+                    data: {
+                        href: String(window.location && window.location.href || ''),
+                        origin: String(window.location && window.location.origin || ''),
+                        protocol: String(window.location && window.location.protocol || ''),
+                        isSecureContext: Boolean(window.isSecureContext)
+                    },
+                    timestamp: Date.now()
+                })
+            }).catch(() => {});
+            // #endregion
+
+            document.addEventListener('click', (event) => {
+                const el = event && event.target && event.target.closest ? event.target : null;
+                const anchor = el ? el.closest('a[href]') : null;
+                if (!anchor) return;
+                const href = anchor.getAttribute('href') || '';
+                if (!shouldLogHref(href)) return;
+
+                // #region agent log
+                fetch(ENDPOINT, {
+                    method: 'POST',
+                    keepalive: true,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        sessionId: 'debug-session',
+                        runId: 'post-fix',
+                        hypothesisId: 'H1',
+                        location: 'index.html:headClickCapture',
+                        message: 'Captured click on Join/signup-related link',
+                        data: {
+                            href,
+                            text: (anchor.textContent || '').trim().slice(0, 80)
+                        },
+                        timestamp: Date.now()
+                    })
+                }).catch(() => {});
+                // #endregion
+            }, true);
+        })();
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -76,7 +140,7 @@
                     <a href="collectives.html" class="warrior-nav-link" data-auth-guard>Collectives</a>
                 </div>
                 <div class="warrior-nav-cta">
-                    <a href="login.html" class="warrior-cta-btn warrior-cta-primary">Join</a>
+                    <a href="login.html?mode=signup" class="warrior-cta-btn warrior-cta-primary">Join</a>
                     <a href="login.html" class="warrior-cta-btn warrior-cta-secondary">Login</a>
                 </div>
                 <button class="warrior-hamburger" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
@@ -94,7 +158,7 @@
             <a href="collectives.html" class="warrior-mobile-nav-link" data-auth-guard>Collectives</a>
             <div class="warrior-mobile-divider"></div>
             <div class="warrior-mobile-cta-group">
-                <a href="signup.html" class="warrior-mobile-cta warrior-cta-primary">Join</a>
+                <a href="login.html?mode=signup" class="warrior-mobile-cta warrior-cta-primary">Join</a>
                 <a href="login.html" class="warrior-mobile-cta warrior-cta-secondary">Login</a>
             </div>
         </div>
@@ -539,6 +603,64 @@
         window.NavaFitAuthConfig = {
             enforceAuth: false
         };
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const signupLinks = Array.from(document.querySelectorAll('a[href="signup.html"]'));
+
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/0d18ea4d-2457-4664-b9ba-4027efd79013', {
+                method: 'POST',
+                keepalive: true,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    sessionId: 'debug-session',
+                    runId: (window.__AGENT_RUN_ID || 'pre-fix'),
+                    hypothesisId: 'H1',
+                    location: 'index.html:DOMContentLoaded',
+                    message: 'Scanned for signup.html links',
+                    data: {
+                        count: signupLinks.length,
+                        sampleText: signupLinks.slice(0, 3).map((node) => (node.textContent || '').trim()).filter(Boolean)
+                    },
+                    timestamp: Date.now()
+                })
+            }).catch(() => {});
+            // #endregion
+
+            signupLinks.forEach((node, idx) => {
+                node.addEventListener('click', () => {
+                    // #region agent log
+                    fetch('http://127.0.0.1:7242/ingest/0d18ea4d-2457-4664-b9ba-4027efd79013', {
+                        method: 'POST',
+                        keepalive: true,
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            sessionId: 'debug-session',
+                            runId: (window.__AGENT_RUN_ID || 'pre-fix'),
+                            hypothesisId: 'H1',
+                            location: 'index.html:signupLinkClick',
+                            message: 'Clicked link to signup.html',
+                            data: {
+                                index: idx,
+                                href: node.getAttribute('href'),
+                                text: (node.textContent || '').trim().slice(0, 60)
+                            },
+                            timestamp: Date.now()
+                        })
+                    }).catch(() => {});
+                    // #endregion
+                }, {
+                    once: true
+                });
+            });
+        }, {
+            once: true
+        });
     </script>
     <script type="module" src="scripts/hero-video.js"></script>
     <script type="module" src="scripts/auth-guard.js"></script>

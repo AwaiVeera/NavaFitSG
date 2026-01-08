@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Hind, Rajdhani, Teko } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+import DebugAgentLogger from "./DebugAgentLogger";
 
 const fontBody = Hind({
   subsets: ["latin", "devanagari"],
@@ -97,6 +98,7 @@ export default function RootLayout({
       <body
         className={`${fontBody.variable} ${fontHeading.variable} ${fontSubheading.variable} antialiased font-body`}
       >
+        <DebugAgentLogger />
         {children}
       </body>
     </html>
